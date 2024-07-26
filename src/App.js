@@ -1,7 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
-import ExpenseItem from "./components/ExpenseItem";
-import Expense from "./components/Expense";
+import ExpenseItem from "./components/Expenses/ExpenseItem";
+import Expense from "./components/Expenses/Expense";
+import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
   const expenses = [
@@ -41,6 +42,7 @@ function App() {
     <div className="App text-2xl font-bold">
       <h1 className="font-bold text-purple">Hello world</h1>
       <p>lorem</p>
+      <NewExpense />
       <Expense items={expenses} />
     </div>
   );
