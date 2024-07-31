@@ -3,6 +3,7 @@ import "./App.css";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
 import Expense from "./components/Expenses/Expense";
 import NewExpense from "./components/NewExpense/NewExpense";
+import TodoList from "./components/Todos/TodoList";
 
 function App() {
   const expenses = [
@@ -44,6 +45,7 @@ function App() {
       <p>lorem</p>
       <NewExpense />
       <Expense items={expenses} />
+      <TodoList />
     </div>
   );
 }

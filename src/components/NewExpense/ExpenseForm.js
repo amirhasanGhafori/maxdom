@@ -30,9 +30,18 @@ const ExpenseForm = () => {
     });
   };
 
+  const submitHandler = event=>{
+    event.preventDefault();
+    const expenseData = {
+        ...userInput,
+        date:new Date(userInput.date)
+    }
+    console.log(expenseData)
+  }
+
   return (
     <>
-      <form class="max-w-2xl bg-gray-800 mx-auto p-3 rounded-lg">
+      <form onSubmit={submitHandler} class="max-w-2xl bg-gray-800 mx-auto p-3 rounded-lg">
         <div class="relative z-0 w-full mb-5 group">
           <input
             onChange={titleChangeHandler}
