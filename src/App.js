@@ -4,6 +4,7 @@ import ExpenseItem from "./components/Expenses/ExpenseItem";
 import Expense from "./components/Expenses/Expense";
 import NewExpense from "./components/NewExpense/NewExpense";
 import TodoList from "./components/Todos/TodoList";
+import Todo from "./components/Todos/Todo";
 
 function App() {
   const expenses = [
@@ -39,12 +40,18 @@ function App() {
     },
   ];
 
+  const addExpenseHandler = expense =>{
+    console.log("App.js Here")
+    console.log(expense)
+  }
+
   return (
     <div className="App text-2xl font-bold">
       <h1 className="font-bold text-purple">Hello world</h1>
       <p>lorem</p>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler}/>
       <Expense items={expenses} />
+      <TodoList />
       <TodoList />
     </div>
   );
