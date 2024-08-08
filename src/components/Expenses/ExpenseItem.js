@@ -16,7 +16,7 @@ function ExpenseItem(props) {
     <Cart className="bg-gray-900 p-3 flex items-center justify-between max-w-2xl rounded-lg gap-2 m-2 mx-auto">
       <div className="flex gap-8 items-center">
         <ExpenseDate date={props.date} />
-        <h2 className="text-white">{title}</h2>
+        <h2 className="text-white">{props.title}</h2>
       </div>
       <button onClick={eventHandler} className="p-2 rounded-lg bg-green-500">${props.amount}</button>
     </Cart>
