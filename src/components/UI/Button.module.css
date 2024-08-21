@@ -1,0 +1,13 @@
+.red_house{
+    background-color: rgb(50, 43, 43);
+    padding: 2px;
+    border-radius: 10px;
+}
+
+.red_house:hover{
+    background-color: brown;
+}
+
+.red_house.invalid{
+    color: red!important;
+}
