@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ExpenseFilter from "./ExpenseFilter";
 import ExpensesList from "./ExpensesList";
 import ExpensesChart from "./ExpensesChart";
+import ExpenseContext from "../../store/expense-context";
 
 function Expense(props) {
   const [filteredYear, setFilteredYear] = useState("2020");
+  const ctx = useContext(ExpenseContext);
 
-  const filtredExpense = props.items.filter((expense) => {
+  const filtredExpense = ctx.expenses.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
 

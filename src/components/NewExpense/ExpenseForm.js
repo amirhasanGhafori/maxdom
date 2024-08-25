@@ -1,5 +1,6 @@
-import {useEffect, useReducer , useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import Button from "../UI/Button";
+import ExpenseContext from "../../store/expense-context";
 
 const titleReducer = (state, action) => {
   if (action.type === "INPUT_USER") {
@@ -9,21 +10,23 @@ const titleReducer = (state, action) => {
 };
 
 const amountReducer = (state, action) => {
-  if(action.type === 'INPUT_USER')
-    return { value: action.val, isValid: (action.val !== "" && Number.isInteger(parseInt(action.val))) };
+  if (action.type === "INPUT_USER")
+    return {
+      value: action.val,
+      isValid: action.val !== "" && Number.isInteger(parseInt(action.val)),
+    };
 
-  return {value:'',isValid:false}
+  return { value: "", isValid: false };
 };
 
 const dateReducer = (state, action) => {
-  if(action.type === 'INPUT_USER')
+  if (action.type === "INPUT_USER")
     return { value: action.val, isValid: action.val !== "" };
 
-  return {value:'',isValid:false}
+  return { value: "", isValid: false };
 };
 
 const ExpenseForm = (props) => {
-
   const [validForm, setValidForm] = useState(false);
 
   const [titleState, dispatchTitle] = useReducer(titleReducer, {
@@ -41,10 +44,11 @@ const ExpenseForm = (props) => {
     isValid: false,
   });
 
-  const {isValid:titleIsValid} = titleState;
-  const {isValid:amountIsValid} = amountState;
-  const {isValid:dateIsValid} = dateState;
+  const { isValid: titleIsValid } = titleState;
+  const { isValid: amountIsValid } = amountState;
+  const { isValid: dateIsValid } = dateState;
 
+  const ctx = useContext(ExpenseContext);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,7 +57,7 @@ const ExpenseForm = (props) => {
       );
     }, 500);
 
-    console.log('Effect IS Working')
+    console.log("Effect IS Working");
 
     return () => {
       console.log("Cleanup");
@@ -77,12 +81,15 @@ const ExpenseForm = (props) => {
     event.preventDefault();
 
     const expenseData = {
+      id:Math.random().toString(),
       title: titleState.value,
       amount: amountState.value,
       date: new Date(dateState.value),
     };
-    props.onSaveExpenseData(expenseData);
-    props.showToast();
+    ctx.onExpense(expenseData)
+    // props.onSaveExpenseData(expenseData);
+    ctx.onToast()
+    ctx.addNewLog();
 
     dispatchTitle({});
     dispatchAmount({});
@@ -140,7 +147,7 @@ const ExpenseForm = (props) => {
         </div>
 
         <Button type="text" validForm={validForm} onClick={submitHandler}>
-          Add Expense
+          {ctx.isLoggedIn ? "Add Expense" : "Login First"}
         </Button>
       </form>
     </>
