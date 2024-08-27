@@ -4,7 +4,7 @@ const NewExpense = (props) => {
 
   return (
     <>
-      <h1>Add New Expense</h1>
+      <h1 className="my-5">Add New Expense</h1>
       <ExpenseForm/>
     </>
   );

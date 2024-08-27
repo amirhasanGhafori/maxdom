@@ -1,6 +1,7 @@
 import { useContext, useEffect, useReducer, useState } from "react";
 import Button from "../UI/Button";
 import ExpenseContext from "../../store/expense-context";
+import AuthContext from "../../store/auth-context";
 
 const titleReducer = (state, action) => {
   if (action.type === "INPUT_USER") {
@@ -28,6 +29,7 @@ const dateReducer = (state, action) => {
 
 const ExpenseForm = (props) => {
   const [validForm, setValidForm] = useState(false);
+  const auth = useContext(AuthContext);
 
   const [titleState, dispatchTitle] = useReducer(titleReducer, {
     value: "",
@@ -43,6 +45,7 @@ const ExpenseForm = (props) => {
     value: "",
     isValid: false,
   });
+  
 
   const { isValid: titleIsValid } = titleState;
   const { isValid: amountIsValid } = amountState;
@@ -147,7 +150,7 @@ const ExpenseForm = (props) => {
         </div>
 
         <Button type="text" validForm={validForm} onClick={submitHandler}>
-          {ctx.isLoggedIn ? "Add Expense" : "Login First"}
+          {auth.isLogged ? "Add Expense" : "Login First"}
         </Button>
       </form>
     </>
