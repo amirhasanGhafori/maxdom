@@ -1,3 +1,4 @@
+import ErrorBoundary from "../ErrorBoundary";
 import ExpenseItem from "./ExpenseItem";
 
 const ExpensesList = (props) => {
@@ -8,14 +9,16 @@ const ExpensesList = (props) => {
 
   return (
     <ul>
+      <ErrorBoundary>
         {props.items.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))}
+          <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+          />
+        ))}
+      </ErrorBoundary>
     </ul>
   );
 };
